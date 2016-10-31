@@ -1,0 +1,4 @@
+<resources>
+    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">fFLjwSKETMOSNvOpaWJbsbQbF92DN1ouPeOkf</string>
+    <string name="app_name">EatMore</string>
+</resources>
