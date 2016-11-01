@@ -8,9 +8,14 @@ import Seller from "../Seller";//发现页
 import Users from "../Users";//个人中心页
 import Log from "../page/Log";//登录页
 import Products from "../page/Products";//产品页
+import TimeKill from "../page/TimeKill";//秒杀页
 import Test from "../Test";//测试页
+// import AnimationInit from "react-native-navigator-animation";
+import AnimationInit from "./Animation";
 
 let NavigatorSceneConfigs = require('NavigatorSceneConfigs');//转场动画
+let buildStyleInterpolator = require('buildStyleInterpolator');
+let NavAnimate = AnimationInit(buildStyleInterpolator);
 
 const switchMain = {
 	...NavigatorSceneConfigs.FadeAndroid,
@@ -21,22 +26,25 @@ const switchMain = {
 // 直接使用
 export const Routes = {
 	Home:{
-		name:"Home",component:Home,index:0,animationType:switchMain,params:{}
+		name:"Home",component:Home,index:0,animationType:NavAnimate.SwitchMain,params:{}
 	},
 	Seller:{
-		name:"Seller",component:Seller,index:1,animationType:switchMain,params:{}
+		name:"Seller",component:Seller,index:1,animationType:NavAnimate.SwitchMain,params:{}
 	},
 	Users:{
-		name:"Users",component:Users,index:2,animationType:switchMain,params:{}
+		name:"Users",component:Users,index:2,animationType:NavAnimate.SwitchMain,params:{}
 	},
 	Log:{
-		name:"Log",component:Log,index:3,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
+		name:"Log",component:Log,index:3,animationType:NavAnimate.AnimationRotateInLeft,params:{}
 	},
 	Products:{
 		name:"Products",component:Products,index:4,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
 	},
+	TimeKill:{
+		name:"TimeKill",component:TimeKill,index:5,animationType:NavAnimate.AnimationScaleInRightDown,params:{}
+	},
 	Test:{
-		name:"Test",component:Test,index:4,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
+		name:"Test",component:Test,index:6,animationType:NavAnimate.AnimationScaleInRightDown,params:{}
 	}
 }
 

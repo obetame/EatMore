@@ -22,6 +22,10 @@ class Test extends Component{
 		Atop:new Animated.Value(0),
 		Abottom:new Animated.Value(0),
 		rotation:new Animated.Value(0),
+		rotation0:new Animated.Value(0),
+		rotation1:new Animated.Value(0),
+		rotation2:new Animated.Value(0),
+		rotation3:new Animated.Value(0),
 		Scale:new Animated.Value(0),
 		Lines1Top:new Animated.Value(0),
 		Lines1Bottom:new Animated.Value(0),
@@ -68,7 +72,7 @@ class Test extends Component{
 					}]}>
 						<Animated.Image style={[styles.img,{
 							transform: [{
-								rotateZ: this.state.rotation.interpolate({
+								rotateZ: this.state.rotation0.interpolate({
 									inputRange: [0,1],
 									outputRange: ['0deg', '360deg']
 								})
@@ -76,7 +80,7 @@ class Test extends Component{
 						}]} source={require("./assest/1_icon_kinds.png")}></Animated.Image>
 						<Animated.Image style={[styles.img,{
 							transform: [{
-								rotateZ: this.state.rotation.interpolate({
+								rotateZ: this.state.rotation1.interpolate({
 									inputRange: [0,1],
 									outputRange: ['0deg', '360deg']
 								})
@@ -84,7 +88,7 @@ class Test extends Component{
 						}]} source={require("./assest/2_icon_kinds.png")}></Animated.Image>
 						<Animated.Image style={[styles.img,{
 							transform: [{
-								rotateZ: this.state.rotation.interpolate({
+								rotateZ: this.state.rotation2.interpolate({
 									inputRange: [0,1],
 									outputRange: ['0deg', '360deg']
 								})
@@ -92,7 +96,7 @@ class Test extends Component{
 						}]} source={require("./assest/1_icon_kinds.png")}></Animated.Image>
 						<Animated.Image style={[styles.img,{
 							transform: [{
-								rotateZ: this.state.rotation.interpolate({
+								rotateZ: this.state.rotation3.interpolate({
 									inputRange: [0,1],
 									outputRange: ['0deg', '360deg']
 								})
@@ -117,32 +121,32 @@ class Test extends Component{
 						<Animated.Image style={[styles.img,{
 							transform: [{
 								rotateZ: this.state.rotation.interpolate({
-									inputRange: [0,1],
-									outputRange: ['0deg', '360deg']
+									inputRange: [0,0.6,1],
+									outputRange: ['0deg',"60deg",'0deg']
 								})
 						}]
 						}]} source={require("./assest/1_icon_kinds.png")}></Animated.Image>
 						<Animated.Image style={[styles.img,{
 							transform: [{
 								rotateZ: this.state.rotation.interpolate({
-									inputRange: [0,1],
-									outputRange: ['0deg', '360deg']
+									inputRange: [0,0.6,1],
+									outputRange: ['0deg',"60deg", '0deg']
 								})
 						}]
 						}]} source={require("./assest/2_icon_kinds.png")}></Animated.Image>
 						<Animated.Image style={[styles.img,{
 							transform: [{
 								rotateZ: this.state.rotation.interpolate({
-									inputRange: [0,1],
-									outputRange: ['0deg', '360deg']
+									inputRange: [0,0.6,1],
+									outputRange: ['0deg',"60deg", '0deg']
 								})
 						}]
 						}]} source={require("./assest/1_icon_kinds.png")}></Animated.Image>
 						<Animated.Image style={[styles.img,{
 							transform: [{
 								rotateZ: this.state.rotation.interpolate({
-									inputRange: [0,1],
-									outputRange: ['0deg', '360deg']
+									inputRange: [0,0.6,1],
+									outputRange: ['0deg',"60deg", '0deg']
 								})
 						}]
 						}]} source={require("./assest/2_icon_kinds.png")}></Animated.Image>
@@ -166,56 +170,71 @@ class Test extends Component{
 		)
 	}
 	_Start(){
-		// this.state.Atop.setValue(0);
-		// Animated.parallel([
-		// 	Animated.spring(
-		// 		this.state.Atop,
-		// 		{toValue: 1,duration: 500,friction:6,tension:60},
-		// 	),
-		// 	Animated.spring(this.state.Scale,{
-		// 		toValue:1,
-		// 		duration:500
-		// 	})
-		// ]).start(()=>{
-		// 	this.state.rotation.setValue(0);
-		// })
-		
-		// this.state.Abottom.setValue(0);
-		this.state.Lines1Top.setValue(0);
-		this.state.Lines2Top.setValue(0);
-		Animated.sequence([
-			Animated.spring(this.state.Lines1Top,{
-				toValue: 1,duration: 500,friction:6,tension:60
+		this.state.Atop.setValue(0);
+		Animated.parallel([
+			Animated.spring(
+				this.state.Atop,
+				{toValue: 1,duration: 1000,friction:6,tension:60},
+			),
+			Animated.spring(this.state.Scale,{
+				toValue:1,
+				duration:1000
 			}),
-			Animated.spring(this.state.Lines2Top,{
-				toValue: 1,duration: 500,friction:6,tension:60
-			})
-		]).start()
+			Animated.timing(this.state.rotation0,{
+				toValue:1,duration:250,delay:0
+			}),
+			Animated.timing(this.state.rotation1,{
+				toValue:1,duration:250,delay:50
+			}),
+			Animated.timing(this.state.rotation2,{
+				toValue:1,duration:250,delay:100
+			}),
+			Animated.timing(this.state.rotation3,{
+				toValue:1,duration:250,delay:150
+			}),
+		]).start(()=>{
+			this.state.rotation0.setValue(0);
+			this.state.rotation1.setValue(0);
+			this.state.rotation2.setValue(0);
+			this.state.rotation3.setValue(0);
+		})
+		
+		this.state.Abottom.setValue(0);
+		// this.state.Lines1Top.setValue(0);
+		// this.state.Lines2Top.setValue(0);
+		// Animated.sequence([
+		// 	Animated.spring(this.state.Lines2Top,{
+		// 		toValue: 1,duration: 100,friction:6,tension:60
+		// 	}),
+		// 	Animated.spring(this.state.Lines1Top,{
+		// 		toValue: 1,duration: 100,friction:6,tension:60
+		// 	})
+		// ]).start()
 	}
 	_End(){
-		// this.state.Abottom.setValue(0);
-		// Animated.parallel([
-		// 	Animated.spring(
-		// 		this.state.Abottom,
-		// 		{toValue: 1,duration: 500,friction:6},
-		// 	),
-		// 	Animated.spring(this.state.Scale,{
-		// 		toValue:0,
-		// 		duration:500
-		// 	})
-		// ]).start(()=>{
-		// 	this.state.rotation.setValue(0);
-		// });
-		this.state.Lines1Bottom.setValue(0);
-		this.state.Lines1Bottom.setValue(0);
-		Animated.sequence([
-			Animated.spring(this.state.Lines1Bottom,{
-				toValue: 1,duration: 500,friction:6,tension:60
-			}),
-			Animated.spring(this.state.Lines1Bottom,{
-				toValue: 1,duration: 500,friction:6,tension:60
+		this.state.Abottom.setValue(0);
+		Animated.parallel([
+			Animated.spring(
+				this.state.Abottom,
+				{toValue: 1,duration: 1000,friction:6},
+			),
+			Animated.spring(this.state.Scale,{
+				toValue:0,
+				duration:1000
 			})
-		]).start()
+		]).start(()=>{
+			this.state.rotation.setValue(0);
+		});
+		// this.state.Lines1Bottom.setValue(0);
+		// this.state.Lines2Bottom.setValue(0);
+		// Animated.sequence([
+		// 	Animated.spring(this.state.Lines1Bottom,{
+		// 		toValue: 1,duration: 500,friction:6,tension:60
+		// 	}),
+		// 	Animated.spring(this.state.Lines2Bottom,{
+		// 		toValue: 1,duration: 500,friction:6,tension:60
+		// 	})
+		// ]).start()
 	}
 	// shouldComponentUpdate(){
 	// 	console.log(this.props.updateAlpha);

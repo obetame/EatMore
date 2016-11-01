@@ -48,7 +48,7 @@ class HomeList extends Component{
 		return (
 			<TouchableOpacity 
 				style={styles.body}
-				activeOpactity={1}
+				activeOpacity={1}
 				onPress={()=>{this._onPress(data)}}>
 				<Image source={{uri:data.img}} style={styles.bodyimg} />
 				<Text numberOfLines={1} style={styles.text}>{data.title}</Text>
