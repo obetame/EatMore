@@ -9,7 +9,8 @@ import {
 	Navigator,
 	PixelRatio,
 	TouchableOpacity,
-	Platform
+	Platform,
+	LayoutAnimation
 } from 'react-native';
 import Reactotron from 'reactotron-react-native';
 import {Width,Height,Scale} from "../components/DeviceInfo";//获取设备信息
@@ -22,22 +23,35 @@ class HomeBar extends Component{
 		updateAlpha:PropTypes.number
 	}
 	state = {
-		isFirst:true
+		isFirst:true,
+		width:0.7*Width,
+		bgColor:{backgroundColor:"rgba(251,56,8,0)"},
+		bar3right:0.05*Width
 	}
 	render(){
+		LayoutAnimation.linear();
 		let alpha = this.props.updateAlpha;
 		if (alpha < 0) alpha = 0;
     if (alpha > 1) alpha = alpha.toFixed(2);
 		let bgColor = null;
-		if(alpha!==0 && alpha>0.1){
-			bgColor = {backgroundColor:"rgba(251,56,8,"+alpha+")"};
+		this.state.bgColor = {backgroundColor:"rgba(251,56,8,"+alpha+")"};
+		// if(alpha!==0 && alpha>0.1){
+		// 	bgColor = {backgroundColor:"rgba(251,56,8,"+alpha+")"};
+		// }
+		// else{
+		// 	bgColor = {backgroundColor:"rgba(0,0,0,0.4)"};//设置有默认的底色
+		// }
+		if(this.props.updateAlpha>1){
+			this.state.width = 130;
+			this.state.bar3right = 0.45*Width;
 		}
 		else{
-			bgColor = {backgroundColor:"rgba(0,0,0,0.4)"};
+			this.state.width = Width*0.75;
+			this.state.bar3right = 0.05*Width;
 		}
 		const {RootNavigator} = this.props;
 		return(
-			<View style={[styles.container,bgColor]}>
+			<View style={[styles.container,this.state.bgColor]}>
 				<TouchableOpacity
 				 style={styles.bar1} 
 				 activeOpacity={0.8}
@@ -46,12 +60,18 @@ class HomeBar extends Component{
 				 }}>
 					<Icon name="th-large" size={20} color="#fff" />
 				</TouchableOpacity>
-				<TouchableOpacity style={styles.bar2} activeOpacity={0.8}>
+				<TouchableOpacity style={[styles.bar2,{width:this.state.width}]} activeOpacity={0.8}>
 					<View style={styles.bar2content}>
 						<Icon name="search" size={18} color="#fff" />
+						<Text style={styles.bar2text}>台北经典小吃</Text>
 					</View>
 				</TouchableOpacity>
-				<TouchableOpacity style={styles.bar3} activeOpacity={0.8}>
+				<TouchableOpacity 
+					style={[styles.bar3,{right:this.state.bar3right}]} 
+					activeOpacity={0.8}
+					onPress={(one)=>{
+					 	jumpUseName(RootNavigator,"Articles");
+					}}>
 					<Icon name="envira" size={20} color="#fff" />
 				</TouchableOpacity>
 			</View>
@@ -79,7 +99,6 @@ const styles = StyleSheet.create({
 		}),
 		width:Width,
 		alignItems:"center",
-		justifyContent:"center",
 		position:"absolute",
 		top:0,
 		zIndex:10
@@ -87,31 +106,38 @@ const styles = StyleSheet.create({
 	bar1:{
 		flexDirection:'column',
 		justifyContent:"center",
-		width:0.1*Width,
-		alignItems:"flex-start"
+		alignItems:"center",
+		position:"absolute",
+		left:0.05*Width,
+		bottom:10
 	},
 	bar2:{
 		flexDirection:'row',
 		alignItems:"center",
-		width:0.7*Width,
 		borderRadius:10,
-		borderBottomWidth:1,
-		borderBottomColor:"#fff",
-		height:30
+		borderWidth:1,
+		borderColor:"#fff",
+		// borderBottomWidth:1,
+		// borderBottomColor:"#fff",
+		height:25,
+		marginLeft:45,
+		marginTop:5
 	},
 	bar3:{
 		flexDirection:'column',
 		justifyContent:"center",
-		width:0.1*Width,
-		alignItems:"flex-end"
+		position:"absolute",
+		right:0.05*Width,
+		bottom:10
 	},
 	bar2content:{
 		marginLeft:10,
-		flexDirection:"row"
+		flexDirection:"row",
+		alignItems:"center"
 	},
 	bar2text:{
-		color:"#999",
-		fontSize:16,
+		color:"#fff",
+		fontSize:13,
 		marginLeft:5
 	},
 	bartext:{

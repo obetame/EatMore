@@ -17,7 +17,8 @@ class Header extends Component{
 	static get defaultProps(){
 		return {
 			title:"产品页面",
-			bgColor:"rgb(251,56,8)"
+			bgColor:"rgb(251,56,8)",
+			titleColor:"#fff"
 		}
 	}
 	propTypes:{
@@ -43,9 +44,9 @@ class Header extends Component{
 
 const styles = StyleSheet.create({
 	container: {
-		alignItems: 'center',//左右的中间
+		alignItems: 'center',//上下的中间
 		flexDirection:"row",
-		justifyContent: 'center',//上下的中间
+		justifyContent: 'center',//左右的中间
 		...Platform.select({
 			ios:{
 				height:60,

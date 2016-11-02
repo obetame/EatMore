@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 import {Width,Height,Scale} from "./components/DeviceInfo";//获取设备信息
+import Reactotron from 'reactotron-react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import HomeList from "./Home/HomeList";//列表
@@ -19,10 +20,11 @@ import SellerBar from "./Seller/SellerBar";
 import Tabs from "./components/Tabs";
 import SelectAddress from "./components/SelectAddress";
 import SearchBox from "./components/SearchBox";
+import Articles from "./page/Articles";
 
 class Seller extends Component{
 	state = {
-		title:"Seller"
+		articles:[]
 	};
 	render(){
 		const { RootNavigator } = this.props;
@@ -37,6 +39,7 @@ class Seller extends Component{
 					renderTabBar={() => <ScrollableTabBar />}
 					initialPage={0}>
 					<HomeList RootNavigator={RootNavigator} tabLabel="热门" />
+					<Articles articles={this.state.articles} RootNavigator={RootNavigator} tabLabel="信息" />
 					<SearchBox tabLabel="搜索" />
 					<SelectAddress tabLabel="台湾风味" />
 					<SellerBar tabLabel="泰国风味" />
@@ -44,6 +47,23 @@ class Seller extends Component{
 				<Tabs onselect={1} RootNavigator={RootNavigator} />
 			</View>
 		)
+	}
+	componentWillMount(){
+		// fetch("http://192.168.31.60:10086/api/Topic/List", {
+		// 	method: 'POST',
+		// 	headers: {
+		// 		'Accept': 'application/json',
+		// 		'Content-Type': 'application/json',
+		// 	},
+		// 	body: JSON.stringify({
+		// 		index: 1,
+		// 		size: 10,
+		// 	})
+		// }).then((response)=>response.json()).then((res)=>{
+		// 	this.setState({
+		// 		articles:res.data
+		// 	});
+		// })
 	}
 }
 

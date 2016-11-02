@@ -9,6 +9,8 @@ import Users from "../Users";//个人中心页
 import Log from "../page/Log";//登录页
 import Products from "../page/Products";//产品页
 import TimeKill from "../page/TimeKill";//秒杀页
+import Articles from "../page/Articles";//文章页
+import ReadArticle from "../page/ReadArticle";//阅读文章页
 import Test from "../Test";//测试页
 // import AnimationInit from "react-native-navigator-animation";
 import AnimationInit from "./Animation";
@@ -41,10 +43,16 @@ export const Routes = {
 		name:"Products",component:Products,index:4,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
 	},
 	TimeKill:{
-		name:"TimeKill",component:TimeKill,index:5,animationType:NavAnimate.AnimationScaleInRightDown,params:{}
+		name:"TimeKill",component:TimeKill,index:5,animationType:NavAnimate.AnimationScaleInRight,params:{}
+	},
+	Articles:{
+		name:"Articles",component:Articles,index:6,animationType:NavAnimate.AnimationScaleInRight,params:{}
+	},
+	ReadArticle:{
+		name:"ReadArticle",component:ReadArticle,index:7,animationType:NavAnimate.AnimationScaleInRight,params:{}
 	},
 	Test:{
-		name:"Test",component:Test,index:6,animationType:NavAnimate.AnimationScaleInRightDown,params:{}
+		name:"Test",component:Test,index:8,animationType:NavAnimate.AnimationScaleInRight,params:{}
 	}
 }
 

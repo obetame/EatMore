@@ -25,8 +25,8 @@ class TimeKill extends Component{
 		const { RootNavigator } = this.props;
 		return(
 			<View key={"TimeKill"} style={styles.root}>
-				<StatusBar backgroundColor="#fff" style={{color:"#000"}} barStyle="default" />
-				<Header title="限时秒杀" bgColor="#fff"/>
+				<StatusBar backgroundColor="#fff" style={{color:"#fff"}} barStyle="light-content" />
+				<Header RootNavigator={RootNavigator} title="限时秒杀" titleColor="#fff" bgColor="#000"/>
 				<ScrollableTabView 
 					style={styles.container}
 					tabBarTextStyle={{color:"#000"}}
@@ -34,11 +34,11 @@ class TimeKill extends Component{
 					tabBarUnderlineStyle={{backgroundColor:"rgb(251,56,8)"}}
 					renderTabBar={() => <CustomTabBar />}
 					initialPage={2}>
-					<HomeList tabLabel="12:00|已开抢"></HomeList>
-					<HomeList tabLabel="13:00|已开抢"></HomeList>
-					<HomeList tabLabel="15:00|已开抢"></HomeList>
-					<HomeList tabLabel="17:00|已开抢"></HomeList>
-					<HomeList tabLabel="19:00|已开抢"></HomeList>
+					<HomeList RootNavigator={RootNavigator} tabLabel="12:00|已开抢"></HomeList>
+					<HomeList RootNavigator={RootNavigator} tabLabel="13:00|已开抢"></HomeList>
+					<HomeList RootNavigator={RootNavigator} tabLabel="15:00|已开抢"></HomeList>
+					<HomeList RootNavigator={RootNavigator} tabLabel="17:00|已开抢"></HomeList>
+					<HomeList RootNavigator={RootNavigator} tabLabel="19:00|已开抢"></HomeList>
 				</ScrollableTabView>
 			</View>
 		)
