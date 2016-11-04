@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 		flexDirection:"column",
 		marginTop:10,
 		paddingLeft:10,
-		paddingRight:10
+		paddingRight:10,
 	},
 	title:{
 		height:40,

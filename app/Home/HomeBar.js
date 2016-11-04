@@ -70,7 +70,7 @@ class HomeBar extends Component{
 					style={[styles.bar3,{right:this.state.bar3right}]} 
 					activeOpacity={0.8}
 					onPress={(one)=>{
-					 	jumpUseName(RootNavigator,"Articles");
+					 	jumpUseName(RootNavigator,"MainTabs");
 					}}>
 					<Icon name="envira" size={20} color="#fff" />
 				</TouchableOpacity>

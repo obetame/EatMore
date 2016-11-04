@@ -28,11 +28,16 @@ class Users extends Component{
 	state = {
 		isLogin:this.props.isLogin
 	};
+	static get defaultProps(){
+		return {
+			style:{}
+		}
+	}
 	render(){
 		const {isLogin,RootNavigator,user} = this.props;
 		
 		return(
-			<View style={styles.root}>
+			<View style={[styles.root,this.props.style]}>
 				<StatusBar backgroundColor="#999" style={{color:"#000"}} barStyle="light-content" />
 				<UsersHeader isLogin={isLogin} RootNavigator={RootNavigator} username={user.phone} />
 				<ScrollView style={styles.container}>

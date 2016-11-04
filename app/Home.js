@@ -10,6 +10,7 @@ import {
 	ToastAndroid,
 	Navigator,
 	Alert,
+	Image,
 	RefreshControl,
 	Platform
 } from 'react-native';
@@ -24,6 +25,7 @@ import Tabs from "./components/Tabs";//底部
 import HomeMenu from "./Home/HomeMenu"//菜单
 import HomeActiveity from "./Home/HomeActivity";//活动
 import HomeKill from "./Home/HomeKill";//秒杀
+import Load from "./components/Load";
 
 import { connect } from 'react-redux';
 import { LogIn, skipLogIn } from './action/ActionUser';
@@ -35,7 +37,7 @@ import {routesNumber} from "./components/RouteStack";//路由信息
 class Home extends Component{
 	static get defaultProps(){
 		return {
-
+			style:{}
 		}
 	}
 	state = {
@@ -46,7 +48,7 @@ class Home extends Component{
 	render(){
 		const { RootNavigator } = this.props;
 		return(
-			<View key={"Home"} style={styles.root}>
+			<View key={"Home"} style={[styles.root,this.props.style]}>
 				<StatusBar translucent={true} barStyle="light-content" />
 				<HomeBar RootNavigator={RootNavigator} updateAlpha={this.state.updateAlpha} />
 				<ScrollView 
@@ -70,13 +72,15 @@ class Home extends Component{
 					<HomeSlider2 RootNavigator={RootNavigator} />
 					<HomeList RootNavigator={RootNavigator} />
 				</ScrollView>
-					<Tabs onselect={0} RootNavigator={RootNavigator} />
+				<Tabs onselect={0} RootNavigator={RootNavigator} />
+				<Load isShow={true} bgColor="#000" hasChildren={false} Image={0} showBtn={false} BtnStyle={{backgroundColor:"#000"}} opacity={0.6} fadeWay="up" bgAnimate="default" ref="Load">
+					<Image style={{width:100,height:100}} source={require("./assest/load1.gif")}></Image>
+				</Load>
 			</View>
 		)
 	}
 	componentWillMount(){
 		const { RootNavigator } = this.props;
-		Reactotron.log(routesNumber(RootNavigator));
 		if(Platform.OS === "android"){
 			BackAndroid.addEventListener("hardwareBackPress",()=>{
 				const number = routesNumber(RootNavigator);//多少个路由
@@ -99,17 +103,17 @@ class Home extends Component{
 				}
 			});
 		}
-		
+		// this.refs.Load.OpenLoad();
 	}
 	componentWillUnmount(){
 		if(Platform.OS === 'android'){
 			BackAndroid.removeEventListener("hardwareBackPress");
 		}
-		
 	}
 	_onRefresh(){
 		this.setState({isRefreshing:true});
 		PromiseRefreshing(this.props).then(()=>{
+			this.refs.Load.setTimeClose();
 			this.setState({
 				isRefreshing:false
 			});
@@ -129,6 +133,11 @@ class Home extends Component{
     this.setState({
     	updateAlpha:alpha
     });
+	}
+	componentDidMount(){
+		setTimeout(()=>{
+			this.refs.Load.CloseLoad();
+		},2000)
 	}
 }
 

@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { ChangeList,EmptyList } from '../action/ActionHome';
-
+import Reactotron from 'reactotron-react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {Width,Height,Scale} from "../components/DeviceInfo";//获取设备信息
@@ -37,6 +37,8 @@ class HomeList extends Component{
 				</View>
 				<ListView
 					pageSize={2}
+					onEndReached={()=>{this._onEndReached()}}
+					onEndReachedThreshold={100}
 					contentContainerStyle={styles.lists}
 					dataSource={ds.cloneWithRows(this.props.HomeList)}
 					renderRow={(rowData)=> this._renderList(rowData)}
@@ -58,6 +60,9 @@ class HomeList extends Component{
 				</View>
 			</TouchableOpacity>
 		)
+	}
+	_onEndReached(){
+		// Reactotron.log("yes");
 	}
 	_onPress(item){
 		const {RootNavigator} = this.props;

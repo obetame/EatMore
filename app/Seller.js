@@ -21,15 +21,21 @@ import Tabs from "./components/Tabs";
 import SelectAddress from "./components/SelectAddress";
 import SearchBox from "./components/SearchBox";
 import Articles from "./page/Articles";
+import Load from "./components/Load";//加载动画显示
 
 class Seller extends Component{
 	state = {
 		articles:[]
 	};
+	static get defaultProps(){
+		return {
+			style:{}
+		}
+	}
 	render(){
 		const { RootNavigator } = this.props;
 		return(
-			<View key={"Seller"} style={styles.root}>
+			<View key={"Seller"} style={[styles.root,this.props.style]}>
 				<StatusBar backgroundColor="rgb(251,56,8)" style={{color:"#000"}} barStyle="default" />
 				<ScrollableTabView 
 					style={styles.container}
@@ -48,22 +54,33 @@ class Seller extends Component{
 			</View>
 		)
 	}
-	componentWillMount(){
-		// fetch("http://192.168.31.60:10086/api/Topic/List", {
-		// 	method: 'POST',
-		// 	headers: {
-		// 		'Accept': 'application/json',
-		// 		'Content-Type': 'application/json',
-		// 	},
-		// 	body: JSON.stringify({
-		// 		index: 1,
-		// 		size: 10,
-		// 	})
-		// }).then((response)=>response.json()).then((res)=>{
-		// 	this.setState({
-		// 		articles:res.data
-		// 	});
-		// })
+	componentDidMount(){
+		// this.OpenLoad();
+		fetch("http://192.168.31.86/api/Topic/List", {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				index: 1,
+				size: 20,
+			})
+		}).then((response)=>response.json()).then((res)=>{
+			this.setState({
+				articles:res.data.content
+			});
+		}).catch((e)=>{
+			Reactotron.log(e)
+		});
+	}
+	CloseLoad(){
+		// 关闭加载动画
+		this.refs.Load.CloseLoad();
+	}
+	OpenLoad(){
+		// 打开加载动画
+		this.refs.Load.OpenLoad();
 	}
 }
 

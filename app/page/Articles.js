@@ -14,6 +14,7 @@ import {
 import {Width,Height,Scale} from "../components/DeviceInfo";//获取设备信息
 import {jumpUseName} from "../components/RouteStack";//路由栈
 import Reactotron from 'reactotron-react-native';
+import Load from "../components/Load";
 
 const Articles = React.createClass({
 	propTypes:{
@@ -22,6 +23,11 @@ const Articles = React.createClass({
 	getDefaultProps(){
 		return {
 			articles:[]
+		}
+	},
+	getInitialState(){
+		return {
+			NoShowLoad:false
 		}
 	},
 	render(){
@@ -35,6 +41,7 @@ const Articles = React.createClass({
 					dataSource={ds.cloneWithRows(this.props.articles)}
 					renderRow={(rowData)=> this._renderList(rowData)}
 					/>
+				{/*<Load opacity={0.5} ref="Load" />*/}
 			</View>
 		)
 	},
@@ -51,35 +58,35 @@ const Articles = React.createClass({
 	},
 	_onPress(item){
 		const {RootNavigator} = this.props;
-		Reactotron.log(item.uniqueid)
-		fetch("http://192.168.31.86/api/Topic/GetDetail", {
-			method: 'POST',
+		fetch("http://192.168.31.86/api/Topic/GetDetail/"+item.uniqueid, {
+			method: 'GET',
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				UniqueId: item.uniqueid
-			})
+			}
 		}).then((response)=>response.json()).then((res)=>{
-			Reactotron.log(res)
 			jumpUseName(RootNavigator,"ReadArticle",res.data);
+		}).catch((e)=>{
+			Reactotron.log(e);
 		});
+	},
+	componentDidMount(){
+		// this.refs.Load.OpenLoad();
 	}
 })
 
 const styles = StyleSheet.create({
 	root:{
-		width:Width,
-		flexDirection:"column",
+		// width:Width,
+		// flexDirection:"column",
 		backgroundColor:"#fff",
-		flex:1,
+		flex:1
 	},
 	container:{
 		flex: 1, 
 		position: 'relative', 
 		flexDirection: 'column', 
-		backgroundColor: 'transparent'
+		backgroundColor: '#fff'
 	},
 	lists:{
 		flexDirection:"row",

@@ -63,7 +63,10 @@ const styles = StyleSheet.create({
 		width:Width,
 		flexDirection:"column",
 		backgroundColor:"#fff",
-		flex:1
+		flex:1,
+		shadowColor:"#000",
+		shadowOffset:{width:10,height:10},
+		shadowRadius:10
 	},
 	container:{
 		flex: 1, 

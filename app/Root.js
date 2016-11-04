@@ -52,9 +52,9 @@ class Root extends Component {
 	}
 	componentWillMount(){
 		Animated.timing(          // Uses easing functions
-       this.state.fadeAnim,    // The value to drive
-       {toValue: 1},           // Configuration
-     ).start();                // Don't forget start!
+			 this.state.fadeAnim,    // The value to drive
+			 {toValue: 1},           // Configuration
+		 ).start();                // Don't forget start!
 		
 		InteractionManager.runAfterInteractions(()=>{
 			PromiseRefreshing(this.props).then(()=>{

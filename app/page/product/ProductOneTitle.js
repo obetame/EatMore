@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import {Width,Height,Scale} from "../../components/DeviceInfo";//获取设备信息
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Reactotron from 'reactotron-react-native';
 
 const ProductOneTitle = React.createClass({
 	render(){
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
 		paddingLeft:10,
 		paddingRight:10,
 		paddingBottom:10,
-		flex:1
+		flex:1,
 	},
 	title:{
 		marginBottom:10

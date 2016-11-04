@@ -330,12 +330,8 @@ const RightRotateInDown = {
 	  extrapolate: true
 	},
 	opacity:{
-		from:0,
-		to:1,
-		min:0,
-		max:1,
-		type:"linear",
-		round: Scale
+		value:1,
+		type:"constant"
 	},
 	transformTranslate: {
 		from: {x: 1, y: 0, z: 0},
@@ -358,12 +354,8 @@ const LeftRotateOutDown = {
 	  extrapolate: true
 	},
 	opacity:{
-		from:1,
-		to:0,
-		min:0,
-		max:1,
-		type:"linear",
-		round: Scale
+		value:1,
+		type:"constant"
 	},
 	transformTranslate: {
 		from: {x: 0, y: 0, z: 0},
@@ -459,7 +451,7 @@ const CenterScaleIn = {
 		type:"linear"
 	},
 	transformScale:{
-		from:{x:0.5,y:0.5,z:0.5},
+		from:{x:0.4,y:0.4,z:0.4},
 		to:{x:1,y:1,z:1},
 		min:0,
 		max:1,
@@ -478,7 +470,7 @@ const CenterScaleOut = {
 	},
 	transformScale:{
 		from:{x:1,y:1,z:1},
-		to:{x:0.5,y:0.5,z:0.5},
+		to:{x:0.4,y:0.4,z:0.4},
 		min:0,
 		max:1,
 		type:"linear",
@@ -486,27 +478,39 @@ const CenterScaleOut = {
 	},
 }
 
-const switchMain = {
+const Main = {
 	opacity:{
 		value:1,
 		type:"constant"
 	},
-	
+	transformTranslate: {
+		value:1,
+		type:"constant"
+	},
+	translateX: {
+    from: 0,
+    to: 0,
+    min: 0,
+    max: 1,
+    type: 'linear',
+    extrapolate: true,
+  },
 }
 
-// 主界面tab标签切换
 function SwitchMain(init){
 	let buildStyleInterpolator = init;
 	return Object.assign({},{
 		...NavigatorSceneConfigs.FadeAndroid,
 		animationInterpolators:{
 			into:buildStyleInterpolator({
-				...switchMain
+				...Main,
 			}),
 			out:buildStyleInterpolator({
-				...switchMain
+				...Main,
 			})
-		}
+		},
+		defaultTransitionVelocity:0,
+		springTension:1000
 	});
 }
 

@@ -11,6 +11,7 @@ import Products from "../page/Products";//产品页
 import TimeKill from "../page/TimeKill";//秒杀页
 import Articles from "../page/Articles";//文章页
 import ReadArticle from "../page/ReadArticle";//阅读文章页
+import MainTabs from "../MainTabs";//测试主页切换
 import Test from "../Test";//测试页
 // import AnimationInit from "react-native-navigator-animation";
 import AnimationInit from "./Animation";
@@ -37,22 +38,25 @@ export const Routes = {
 		name:"Users",component:Users,index:2,animationType:NavAnimate.SwitchMain,params:{}
 	},
 	Log:{
-		name:"Log",component:Log,index:3,animationType:NavAnimate.AnimationRotateInLeft,params:{}
+		name:"Log",component:Log,index:3,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
 	},
 	Products:{
 		name:"Products",component:Products,index:4,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
 	},
 	TimeKill:{
-		name:"TimeKill",component:TimeKill,index:5,animationType:NavAnimate.AnimationScaleInRight,params:{}
+		name:"TimeKill",component:TimeKill,index:5,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
 	},
 	Articles:{
-		name:"Articles",component:Articles,index:6,animationType:NavAnimate.AnimationScaleInRight,params:{}
+		name:"Articles",component:Articles,index:6,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
 	},
 	ReadArticle:{
-		name:"ReadArticle",component:ReadArticle,index:7,animationType:NavAnimate.AnimationScaleInRight,params:{}
+		name:"ReadArticle",component:ReadArticle,index:7,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
+	},
+	MainTabs:{
+		name:"MainTabs",component:MainTabs,index:8,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
 	},
 	Test:{
-		name:"Test",component:Test,index:8,animationType:NavAnimate.AnimationScaleInRight,params:{}
+		name:"Test",component:Test,index:8,animationType:NavigatorSceneConfigs.FloatFromRight,params:{}
 	}
 }
 

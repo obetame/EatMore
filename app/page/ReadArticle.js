@@ -13,11 +13,16 @@ import {
 } from 'react-native';
 import {Width,Height,Scale} from "../components/DeviceInfo";//获取设备信息
 import {jumpUseName} from "../components/RouteStack";//路由栈
-import Load from "../components/Load";//加载动画显示
+import Reactotron from 'reactotron-react-native';
 
 const ReadArticle = React.createClass({
 	propTypes:{
-		articles:PropTypes.array.isRequired,
+		title:PropTypes.string.isRequired,
+		url:PropTypes.string,
+		avatar:PropTypes.string,
+		abstract:PropTypes.string,
+		source:PropTypes.string.isRequired,
+		content:PropTypes.string,
 	},
 	getDefaultProps(){
 		return {
@@ -31,16 +36,13 @@ const ReadArticle = React.createClass({
 	},
 	render(){
 		const {RootNavigator} = this.props;
+		console.log(this.props.source)
 		return(
 			<View style={styles.root}>
-				<Load ref="Load" navigator={RootNavigator} />
-				<WebView onLoad={()=>{this._onLoad()}} source={{uri:"http://1yhp.net/webapp"}} />
+				<WebView onLoad={()=>{}} source={{html:this.props.source}} />
 			</View>
 		)
 	},
-	_onLoad(){
-		this.refs.Load.CloseLoad();
-	}
 })
 
 const styles = StyleSheet.create({
